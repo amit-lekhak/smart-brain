@@ -1,0 +1,10 @@
+.navlink {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navlink p {
+    text-decoration: underline;
+    margin: 1.5rem;
+    font-size: 1.5rem;
+}
