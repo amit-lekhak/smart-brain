@@ -1,6 +1,7 @@
 import React from "react";
 import Particles from "react-tsparticles";
 import "./App.css";
+import Card from "./components/card/Card";
 import Navlink from "./components/navlink/NavLink";
 
 class App extends React.Component {
@@ -40,6 +41,13 @@ class App extends React.Component {
       <div>
         <Particles className="particles" options={this.options} />
         <Navlink />
+        <Card >
+          <p>Sign in</p>
+          <p>Email</p>
+          <p>Password</p>
+          <span>Button</span>
+          <span>Register?</span>
+        </Card>
       </div>
     );
   }
