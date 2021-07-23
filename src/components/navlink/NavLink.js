@@ -5,8 +5,8 @@ const NavLink = () => {
   return (
     <div style={{"marginBottom":"20px"}}>
       <nav className="navlink">
-        <p>Sign in</p>
-        <p>Register</p>
+        <p className="route">Sign in</p>
+        <p className="route">Register</p>
       </nav>
     </div>
   );

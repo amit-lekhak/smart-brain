@@ -1,0 +1,44 @@
+.title {
+  font-size: 3rem;
+  
+}
+
+.form-item{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px 0px;
+}
+
+input,button {
+    border: 1px solid grey;
+    background-color: transparent;
+    height: 40px;
+    color: black;
+    padding: 0px 10px;
+    font-size: 1rem;
+    
+}
+
+input:hover, input:focus {
+    background-color: black;
+    color: white
+}
+
+button {
+    border-color: black;
+    width: 80px;
+    margin-top: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.route:hover {
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity .15s ease-in;
+}
