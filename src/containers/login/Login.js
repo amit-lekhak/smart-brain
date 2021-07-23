@@ -23,7 +23,7 @@ const Login = () => {
 
             </form>
 
-            <button><h4>sign in</h4></button>
+            <button><h4>Sign in</h4></button>
 
             <p className="route">Register</p>
         </>

@@ -3,7 +3,8 @@ import Particles from "react-tsparticles";
 import "./App.css";
 import Card from "./components/card/Card";
 import Navlink from "./components/navlink/NavLink";
-import Login from "./containers/login/Login"
+import Login from "./containers/login/Login";
+import Register from "./containers/register/Register";
 
 class App extends React.Component {
   options = {
@@ -42,8 +43,8 @@ class App extends React.Component {
       <div>
         <Particles className="particles" options={this.options} />
         <Navlink />
-        <Card >
-          <Login />
+        <Card>
+          <Register />
         </Card>
       </div>
     );
