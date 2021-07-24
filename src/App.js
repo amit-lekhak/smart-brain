@@ -11,7 +11,10 @@ class App extends React.Component {
   state = {
     route: "home",
     error: "",
-    user: {},
+    user: {
+      "name": "John",
+      "entries": 0
+    },
   };
 
   options = {
@@ -65,7 +68,7 @@ class App extends React.Component {
           onRouteChange={this.onRouteChange}
         />
         {this.state.route === "home" ? (
-          <Home />
+          <Home user={this.state.user} />
         ) : (
           <Card>
             {this.state.route === "login" ? (
