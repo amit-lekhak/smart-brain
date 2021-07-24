@@ -7,6 +7,10 @@ import Login from "./containers/login/Login";
 import Register from "./containers/register/Register";
 
 class App extends React.Component {
+  state = {
+    route: "login",
+  };
+
   options = {
     particles: {
       color: {
@@ -38,14 +42,19 @@ class App extends React.Component {
     },
   };
 
+  onRouteChange = (route) => {
+    if(this.state.route !== route){
+
+      this.setState({route: route})
+    }
+  }
+
   render() {
     return (
       <div>
         <Particles className="particles" options={this.options} />
-        <Navlink />
-        <Card>
-          <Register />
-        </Card>
+        <Navlink onRouteChange={this.onRouteChange} />
+        <Card>{this.state.route === "login" ? <Login onRouteChange={this.onRouteChange} /> : <Register onRouteChange={this.onRouteChange} />}</Card>
       </div>
     );
   }

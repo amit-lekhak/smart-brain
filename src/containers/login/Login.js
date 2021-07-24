@@ -1,7 +1,7 @@
 import React from 'react'
 import "./Login.styles.css";
 
-const Login = () => {
+const Login = ({onRouteChange}) => {
     return (
         <>
             <h1 className="title">Sign In</h1>
@@ -25,7 +25,7 @@ const Login = () => {
 
             <button><h4>Sign in</h4></button>
 
-            <p className="route">Register</p>
+            <p className="route" onClick={() => onRouteChange("register")}>Register</p>
         </>
     )
 }
