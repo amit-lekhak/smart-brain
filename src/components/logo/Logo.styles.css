@@ -1,0 +1,16 @@
+.logo {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    margin: 5% 0px 25px 25px;
+    width: 150px;
+    height:150px;
+    display: flex;
+    background-image: linear-gradient(89deg,#FF5EDF,#04C8DE);
+    
+  }
+
+  img {
+      margin: auto;
+  }
+  

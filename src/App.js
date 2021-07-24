@@ -5,10 +5,11 @@ import Card from "./components/card/Card";
 import Navlink from "./components/navlink/NavLink";
 import Login from "./containers/login/Login";
 import Register from "./containers/register/Register";
+import Home from "./containers/home/Home"
 
 class App extends React.Component {
   state = {
-    route: "login",
+    route: "home",
     error: "",
     user: {},
   };
@@ -64,7 +65,7 @@ class App extends React.Component {
           onRouteChange={this.onRouteChange}
         />
         {this.state.route === "home" ? (
-          <div>Hello World</div>
+          <Home />
         ) : (
           <Card>
             {this.state.route === "login" ? (
