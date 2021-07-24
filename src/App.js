@@ -9,6 +9,8 @@ import Register from "./containers/register/Register";
 class App extends React.Component {
   state = {
     route: "login",
+    error: "",
+    user: {},
   };
 
   options = {
@@ -43,18 +45,46 @@ class App extends React.Component {
   };
 
   onRouteChange = (route) => {
-    if(this.state.route !== route){
-
-      this.setState({route: route})
+    if (this.state.route !== route) {
+      this.setState({ route: route, error: "" });
     }
-  }
+  };
+
+  updateUserState = ({ error, user, route }) => {
+    this.setState({ error, user, route });
+  };
 
   render() {
     return (
       <div>
         <Particles className="particles" options={this.options} />
-        <Navlink onRouteChange={this.onRouteChange} />
-        <Card>{this.state.route === "login" ? <Login onRouteChange={this.onRouteChange} /> : <Register onRouteChange={this.onRouteChange} />}</Card>
+        <Navlink
+          updateUserState={this.updateUserState}
+          route={this.state.route}
+          onRouteChange={this.onRouteChange}
+        />
+        {this.state.route === "home" ? (
+          <div>Hello World</div>
+        ) : (
+          <Card>
+            {this.state.route === "login" ? (
+              <Login
+                updateUserState={this.updateUserState}
+                onRouteChange={this.onRouteChange}
+              />
+            ) : (
+              <Register
+                updateUserState={this.updateUserState}
+                onRouteChange={this.onRouteChange}
+              />
+            )}
+          </Card>
+        )}
+        {this.state.error && (
+          <p style={{ color: "red", textAlign: "center" }}>
+            {this.state.error}
+          </p>
+        )}
       </div>
     );
   }
