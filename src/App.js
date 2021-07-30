@@ -5,15 +5,18 @@ import Card from "./components/card/Card";
 import Navlink from "./components/navlink/NavLink";
 import Login from "./containers/login/Login";
 import Register from "./containers/register/Register";
-import Home from "./containers/home/Home"
+import Home from "./containers/home/Home";
 
 class App extends React.Component {
   state = {
     route: "home",
     error: "",
     user: {
-      "name": "John",
-      "entries": 0
+      name: "",
+      entries: 0,
+      id: "",
+      joined: "",
+      email: "",
     },
   };
 

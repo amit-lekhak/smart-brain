@@ -43,6 +43,7 @@ const Register = ({ onRouteChange, updateUserState }) => {
 
         setEmail("");
         setPassword("");
+        setName("");
         return updateUserState({ error: "", user: data.user, route: "home" });
       })
       .catch((error) => {

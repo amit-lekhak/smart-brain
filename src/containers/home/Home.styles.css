@@ -34,6 +34,7 @@
   background-color: #ffbb11;
   background-image: url("./hexagon.png");
   background-size: 300px;
+  padding: 0px 10px
 }
 
 button {

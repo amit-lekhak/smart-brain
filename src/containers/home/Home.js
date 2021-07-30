@@ -63,7 +63,7 @@ const Home = ({ user: { name, entries: count, id } }) => {
       });
   };
 
-  function imageLoaded(e){
+   const imageLoaded = (e) => {
       setImageSize({height:e.target.height,width:e.target.width})
   }
 
@@ -102,7 +102,7 @@ const Home = ({ user: { name, entries: count, id } }) => {
             {error}
           </p>
         )}
-{console.log(imageSize)}
+
         {showImage && (
           <div className="detected-image">
             <img
