@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.styles.css";
+import { fetchProfile, saveToken } from "../../utility/helperFunctions";
 
 const Login = ({ onRouteChange, updateUserState }) => {
   const [email, setEmail] = useState("test@test.com");
@@ -15,10 +16,7 @@ const Login = ({ onRouteChange, updateUserState }) => {
     }
   };
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (!email || !password) return;
-
+  const loginUser = (email, password) => {
     fetch("/login", {
       method: "POST",
       headers: {
@@ -37,13 +35,42 @@ const Login = ({ onRouteChange, updateUserState }) => {
           });
         }
 
+        const token = data.token;
+
         setEmail("");
         setPassword("");
-        return updateUserState({ error: "", user: data.user, route: "home" });
+        saveToken(token);
+
+        fetchProfile(token)
+          .then((data) => {
+            if (data.error) {
+              return updateUserState({
+                error: data.error,
+                user: {},
+                route: "login",
+              });
+            }
+
+            return updateUserState({
+              error: "",
+              user: data.user,
+              route: "home",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!email || !password) return;
+
+    loginUser(email, password);
   };
 
   return (

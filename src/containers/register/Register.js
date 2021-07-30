@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../login/Login.styles.css";
+import { saveToken } from "../../utility/helperFunctions";
 
 const Register = ({ onRouteChange, updateUserState }) => {
   const [email, setEmail] = useState("");
@@ -18,10 +19,7 @@ const Register = ({ onRouteChange, updateUserState }) => {
     }
   };
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    if (!email || !password || !name) return;
-
+  const registerUser = (email, password, name) => {
     fetch("/register", {
       method: "POST",
       headers: {
@@ -43,11 +41,20 @@ const Register = ({ onRouteChange, updateUserState }) => {
         setEmail("");
         setPassword("");
         setName("");
+
+        saveToken(data.token);
         return updateUserState({ error: "", user: data.user, route: "home" });
       })
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (!email || !password || !name) return;
+
+    registerUser(email, password, name);
   };
 
   return (

@@ -6,17 +6,20 @@ import Navlink from "./components/navlink/NavLink";
 import Login from "./containers/login/Login";
 import Register from "./containers/register/Register";
 import Home from "./containers/home/Home";
+import { fetchProfile, getToken } from "./utility/helperFunctions";
 
 class App extends React.Component {
   state = {
-    route: "home",
+    route: "login",
     error: "",
     user: {
       name: "",
-      entries: 0,
+      entries: "",
       id: "",
       joined: "",
       email: "",
+      age: "",
+      pet: "",
     },
   };
 
@@ -50,6 +53,32 @@ class App extends React.Component {
       },
     },
   };
+
+  componentDidMount() {
+    const token = getToken();
+
+    if (!token) return;
+
+    fetchProfile(token)
+      .then((data) => {
+        if (data.error) {
+          return this.updateUserState({
+            error: data.error,
+            user: {},
+            route: "login",
+          });
+        }
+
+        return this.updateUserState({
+          error: "",
+          user: data.user,
+          route: "home",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   onRouteChange = (route) => {
     if (this.state.route !== route) {

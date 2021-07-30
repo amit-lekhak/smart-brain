@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Logo from "../../components/logo/Logo";
 import "./Home.styles.css";
 import Facebox from "../../components/facebox/Facebox";
+import { getToken } from "../../utility/helperFunctions";
 
 const Home = ({ user: { name, entries: count, id } }) => {
   const [imageUrl, setImageUrl] = useState("");
@@ -9,21 +10,33 @@ const Home = ({ user: { name, entries: count, id } }) => {
   const [error, setError] = useState("");
   const [boxes, setBoxes] = useState([]);
   const [entries, setEntries] = useState(count);
-  const [imageSize,setImageSize] = useState({
-      height:0,width:0
-  })
+  const [imageSize, setImageSize] = useState({
+    height: 0,
+    width: 0,
+  });
 
   const detectImage = (imageUrl) => {
     if (!imageUrl) return;
 
-    setShowImage(false);
-    setError("");
+    const token = getToken()
+
+    
+    setShowImage(true);
+    setError("Fetching...");
+
+    fetchFaceMappings(imageUrl,token)
+
+  };
+
+  const fetchFaceMappings = (imageUrl,token) => {
 
     fetch("/detectface", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+
       },
       body: JSON.stringify({ imageUrl }),
     })
@@ -33,38 +46,44 @@ const Home = ({ user: { name, entries: count, id } }) => {
           return setError(data.error);
         }
 
-        setShowImage(true);
         setError("");
         setBoxes(data.data);
 
-        fetch(`/profile/entry/${id}`, {
-          method: "PUT",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.error) {
-              return setError(data.error);
-            }
-
-            setError("");
-            setEntries(data.entries);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        updateEntryCount(token)
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-   const imageLoaded = (e) => {
-      setImageSize({height:e.target.height,width:e.target.width})
   }
+
+  const updateEntryCount = (token) => {
+    
+    fetch(`/profile/entry`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.error) {
+          return setError(data.error);
+        }
+
+        setError("");
+        setEntries(data.entries);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  const imageLoaded = (e) => {
+    setImageSize({ height: e.target.height, width: e.target.width });
+  };
 
   return (
     <div>
@@ -110,7 +129,9 @@ const Home = ({ user: { name, entries: count, id } }) => {
               src={imageUrl}
               alt="Detected Faces"
             />
-            {boxes && imageSize.height && <Facebox boxes={boxes} imageSize={imageSize} />}
+            {boxes && imageSize.height && (
+              <Facebox boxes={boxes} imageSize={imageSize} />
+            )}
           </div>
         )}
       </div>
