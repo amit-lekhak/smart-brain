@@ -30,7 +30,6 @@ const Login = ({ onRouteChange, updateUserState }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.error) {
-          console.log("Error: " + data.error);
           return updateUserState({
             error: data.error,
             user: {},
