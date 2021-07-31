@@ -1,4 +1,5 @@
 import React from "react";
+import Avatar from "../../containers/profile/avatar/Avatar";
 import {
   removeToken,
   signoutUser,
@@ -18,9 +19,7 @@ const NavLink = ({ onRouteChange, route, updateUserState }) => {
     <div style={{ marginBottom: "20px" }}>
       <nav className="navlink">
         {route === "home" ? (
-          <p className="route" onClick={signoutHandler}>
-            Sign out
-          </p>
+          <Avatar signoutHandler={signoutHandler} />
         ) : (
           <>
             <p className="route" onClick={() => onRouteChange("login")}>
