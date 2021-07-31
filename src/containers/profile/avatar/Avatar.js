@@ -1,14 +1,22 @@
 import React, { useState } from "react";
+import Portal from "../../../components/portal/Portal";
 import Dropdown from "../dropdown/Dropdown";
+import Profile from "../Profile";
 import "./Avatar.styles.css";
 
-const Avatar = ({ signoutHandler }) => {
+const Avatar = ({ signoutHandler, updateUserState, user }) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   const dropdownHandler = () => {
     setToggleDropdown((state) => {
       return !state;
     });
+  };
+
+  const profileClickHandler = () => {
+    dropdownHandler();
+    setShowProfile(true);
   };
 
   return (
@@ -21,7 +29,22 @@ const Avatar = ({ signoutHandler }) => {
           alt="avatar"
         />
       </div>
-      {toggleDropdown && <Dropdown signoutHandler={signoutHandler} />}
+      {toggleDropdown && (
+        <Dropdown
+          profileClickHandler={profileClickHandler}
+          signoutHandler={signoutHandler}
+        />
+      )}
+
+      <Portal>
+        {showProfile && (
+          <Profile
+            setShowProfile={setShowProfile}
+            updateUserState={updateUserState}
+            user={user}
+          />
+        )}
+      </Portal>
     </div>
   );
 };

@@ -7,7 +7,7 @@ import {
 } from "../../utility/helperFunctions";
 import "./Navlink.styles.css";
 
-const NavLink = ({ onRouteChange, route, updateUserState }) => {
+const NavLink = ({ onRouteChange, route, updateUserState, user }) => {
   const signoutHandler = () => {
     signoutUser(getToken());
 
@@ -19,7 +19,11 @@ const NavLink = ({ onRouteChange, route, updateUserState }) => {
     <div style={{ marginBottom: "20px" }}>
       <nav className="navlink">
         {route === "home" ? (
-          <Avatar signoutHandler={signoutHandler} />
+          <Avatar
+            user={user}
+            updateUserState={updateUserState}
+            signoutHandler={signoutHandler}
+          />
         ) : (
           <>
             <p className="route" onClick={() => onRouteChange("login")}>

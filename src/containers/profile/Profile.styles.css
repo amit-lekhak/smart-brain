@@ -1,0 +1,68 @@
+.profile-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 999;
+}
+
+.profile-card {
+  border-radius: 5px;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-items: flex-start;
+}
+
+.close-modal {
+  margin-left: auto;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: grey;
+}
+
+.profile-card .avatar {
+  border-radius: 0;
+  margin: 0px;
+}
+
+.profile-container hr {
+  border: none;
+  border-top: 0.1px solid rgba(128, 122, 122, 0.3);
+  width: 100%;
+}
+
+.profile-input {
+  width: 100%;
+}
+
+.profile-input .form-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.profile-input h4 {
+  margin-bottom: 5px;
+}
+
+.profile-input input {
+  width: 80%;
+}
+
+.profile-input input:hover,
+.profile-input input:focus {
+  background-color: white;
+  color: black;
+}
+
+.profile-button {
+  display: flex;
+  justify-content: space-evenly;
+  color: orangered;
+}

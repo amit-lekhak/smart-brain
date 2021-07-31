@@ -6,7 +6,7 @@ const Login = ({ onRouteChange, updateUserState }) => {
   const [email, setEmail] = useState("test@test.com");
   const [password, setPassword] = useState("123456");
 
-  const onInputChange = (e) => {
+  const onInputChangeHandler = (e) => {
     const field = e.target.name;
     const value = e.target.value;
     if (field === "email") {
@@ -83,7 +83,7 @@ const Login = ({ onRouteChange, updateUserState }) => {
             <h4>Email</h4>
           </label>
           <input
-            onChange={onInputChange}
+            onChange={onInputChangeHandler}
             type="email"
             name="email"
             id="email"
@@ -96,7 +96,7 @@ const Login = ({ onRouteChange, updateUserState }) => {
             <h4>Password</h4>
           </label>
           <input
-            onChange={onInputChange}
+            onChange={onInputChangeHandler}
             type="password"
             name="password"
             id="password"

@@ -7,7 +7,7 @@ const Register = ({ onRouteChange, updateUserState }) => {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
 
-  const onInputChange = (e) => {
+  const onInputChangeHandler = (e) => {
     const field = e.target.name;
     const value = e.target.value;
     if (field === "email") {
@@ -67,7 +67,7 @@ const Register = ({ onRouteChange, updateUserState }) => {
             <h4>Name</h4>
           </label>
           <input
-            onChange={onInputChange}
+            onChange={onInputChangeHandler}
             type="text"
             name="name"
             id="name"
@@ -80,7 +80,7 @@ const Register = ({ onRouteChange, updateUserState }) => {
             <h4>Email</h4>
           </label>
           <input
-            onChange={onInputChange}
+            onChange={onInputChangeHandler}
             type="email"
             name="email"
             id="email"
@@ -93,7 +93,7 @@ const Register = ({ onRouteChange, updateUserState }) => {
             <h4>Password</h4>
           </label>
           <input
-            onChange={onInputChange}
+            onChange={onInputChangeHandler}
             type="password"
             name="password"
             id="password"

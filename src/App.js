@@ -97,6 +97,7 @@ class App extends React.Component {
         <Navlink
           updateUserState={this.updateUserState}
           route={this.state.route}
+          user={this.state.user}
           onRouteChange={this.onRouteChange}
         />
         {this.state.route === "home" ? (
@@ -117,7 +118,7 @@ class App extends React.Component {
           </Card>
         )}
         {this.state.error && (
-          <p style={{ color: "red", textAlign: "center" }}>
+          <p style={{ color: "red", textAlign: "center", fontSize: "2rem" }}>
             {this.state.error}
           </p>
         )}

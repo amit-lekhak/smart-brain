@@ -9,6 +9,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 4px;
+  z-index: 99;
 }
 
 .dropdown hr {
