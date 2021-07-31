@@ -1,9 +1,15 @@
 import React from "react";
-import { removeToken } from "../../utility/helperFunctions";
+import {
+  removeToken,
+  signoutUser,
+  getToken,
+} from "../../utility/helperFunctions";
 import "./Navlink.styles.css";
 
 const NavLink = ({ onRouteChange, route, updateUserState }) => {
-  const signoutUser = () => {
+  const signoutHandler = () => {
+    signoutUser(getToken());
+
     removeToken();
     updateUserState({ error: "", user: {}, route: "login" });
   };
@@ -12,7 +18,7 @@ const NavLink = ({ onRouteChange, route, updateUserState }) => {
     <div style={{ marginBottom: "20px" }}>
       <nav className="navlink">
         {route === "home" ? (
-          <p className="route" onClick={signoutUser}>
+          <p className="route" onClick={signoutHandler}>
             Sign out
           </p>
         ) : (

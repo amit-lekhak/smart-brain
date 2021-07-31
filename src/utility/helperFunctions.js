@@ -13,6 +13,21 @@ const fetchProfile = (token) => {
     });
 };
 
+const signoutUser = (token) => {
+  return fetch("/logout", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
 const saveToken = (token) => {
   if (!token) return;
   window &&
@@ -30,4 +45,4 @@ const getToken = () => {
   );
 };
 
-export { fetchProfile, saveToken, removeToken, getToken };
+export { fetchProfile, saveToken, removeToken, getToken, signoutUser };
