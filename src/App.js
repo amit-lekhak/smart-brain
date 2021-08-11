@@ -4,9 +4,11 @@ import "./App.css";
 import Card from "./components/card/Card";
 import Navlink from "./components/navlink/NavLink";
 import Login from "./containers/login/Login";
-import Register from "./containers/register/Register";
-import Home from "./containers/home/Home";
 import { fetchProfile, getToken } from "./utility/helperFunctions";
+import Loading from "./components/Loading/Loading";
+
+const Register = React.lazy(() => import("./containers/register/Register"));
+const Home = React.lazy(() => import("./containers/home/Home"));
 
 class App extends React.Component {
   state = {
@@ -101,7 +103,9 @@ class App extends React.Component {
           onRouteChange={this.onRouteChange}
         />
         {this.state.route === "home" ? (
-          <Home user={this.state.user} />
+          <React.Suspense fallback={Loading()}>
+            <Home user={this.state.user} />
+          </React.Suspense>
         ) : (
           <Card>
             {this.state.route === "login" ? (
@@ -110,10 +114,12 @@ class App extends React.Component {
                 onRouteChange={this.onRouteChange}
               />
             ) : (
-              <Register
-                updateUserState={this.updateUserState}
-                onRouteChange={this.onRouteChange}
-              />
+              <React.Suspense fallback={Loading()}>
+                <Register
+                  updateUserState={this.updateUserState}
+                  onRouteChange={this.onRouteChange}
+                />
+              </React.Suspense>
             )}
           </Card>
         )}

@@ -1,11 +1,15 @@
 import React from "react";
-import Avatar from "../../containers/profile/avatar/Avatar";
 import {
   removeToken,
   signoutUser,
   getToken,
 } from "../../utility/helperFunctions";
+import Loading from "../Loading/Loading";
 import "./Navlink.styles.css";
+
+const Avatar = React.lazy(() =>
+  import("../../containers/profile/avatar/Avatar")
+);
 
 const NavLink = ({ onRouteChange, route, updateUserState, user }) => {
   const signoutHandler = () => {
@@ -19,11 +23,13 @@ const NavLink = ({ onRouteChange, route, updateUserState, user }) => {
     <div style={{ marginBottom: "20px" }}>
       <nav className="navlink">
         {route === "home" ? (
-          <Avatar
-            user={user}
-            updateUserState={updateUserState}
-            signoutHandler={signoutHandler}
-          />
+          <React.Suspense fallback={Loading()}>
+            <Avatar
+              user={user}
+              updateUserState={updateUserState}
+              signoutHandler={signoutHandler}
+            />
+          </React.Suspense>
         ) : (
           <>
             <p className="route" onClick={() => onRouteChange("login")}>

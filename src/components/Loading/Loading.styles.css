@@ -1,0 +1,28 @@
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 5rem;
+  height: 5rem;
+  border: 5px dotted purple;
+  border-top-color: red;
+  border-left-color: blue;
+  border-bottom-color: green;
+  border-radius: 100%;
+  animation: circle 0.5s ease-in-out alternate-reverse infinite;
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}

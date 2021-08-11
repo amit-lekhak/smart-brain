@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import Portal from "../../../components/portal/Portal";
-import Dropdown from "../dropdown/Dropdown";
-import Profile from "../Profile";
+import Loading from "../../../components/Loading/Loading";
 import "./Avatar.styles.css";
+
+const Portal = React.lazy(() => import("../../../components/portal/Portal"));
+const Dropdown = React.lazy(() => import("../dropdown/Dropdown"));
+const Profile = React.lazy(() => import("../Profile"));
 
 const Avatar = ({ signoutHandler, updateUserState, user }) => {
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -29,22 +31,24 @@ const Avatar = ({ signoutHandler, updateUserState, user }) => {
           alt="avatar"
         />
       </div>
-      {toggleDropdown && (
-        <Dropdown
-          profileClickHandler={profileClickHandler}
-          signoutHandler={signoutHandler}
-        />
-      )}
-
-      <Portal>
-        {showProfile && (
-          <Profile
-            setShowProfile={setShowProfile}
-            updateUserState={updateUserState}
-            user={user}
+      <React.Suspense fallback={Loading()}>
+        {toggleDropdown && (
+          <Dropdown
+            profileClickHandler={profileClickHandler}
+            signoutHandler={signoutHandler}
           />
         )}
-      </Portal>
+
+        <Portal>
+          {showProfile && (
+            <Profile
+              setShowProfile={setShowProfile}
+              updateUserState={updateUserState}
+              user={user}
+            />
+          )}
+        </Portal>
+      </React.Suspense>
     </div>
   );
 };

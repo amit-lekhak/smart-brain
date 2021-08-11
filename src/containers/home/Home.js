@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Logo from "../../components/logo/Logo";
 import "./Home.styles.css";
-import Facebox from "../../components/facebox/Facebox";
 import { getToken } from "../../utility/helperFunctions";
+import Loading from "../../components/Loading/Loading";
+
+const Facebox = React.lazy(() => import("../../components/facebox/Facebox"));
 
 const Home = ({ user: { name, entries: count, id } }) => {
   const [imageUrl, setImageUrl] = useState("");
@@ -18,25 +20,21 @@ const Home = ({ user: { name, entries: count, id } }) => {
   const detectImage = (imageUrl) => {
     if (!imageUrl) return;
 
-    const token = getToken()
+    const token = getToken();
 
-    
     setShowImage(true);
     setError("Fetching...");
 
-    fetchFaceMappings(imageUrl,token)
-
+    fetchFaceMappings(imageUrl, token);
   };
 
-  const fetchFaceMappings = (imageUrl,token) => {
-
+  const fetchFaceMappings = (imageUrl, token) => {
     fetch("https://smart-brain-docker.herokuapp.com/api/detectface", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
-
       },
       body: JSON.stringify({ imageUrl }),
     })
@@ -49,22 +47,20 @@ const Home = ({ user: { name, entries: count, id } }) => {
         setError("");
         setBoxes(data.data);
 
-        updateEntryCount(token)
+        updateEntryCount(token);
       })
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   const updateEntryCount = (token) => {
-    
     fetch(`https://smart-brain-docker.herokuapp.com/api/profile/entry`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
-
       },
     })
       .then((response) => response.json())
@@ -79,7 +75,7 @@ const Home = ({ user: { name, entries: count, id } }) => {
       .catch((error) => {
         console.log(error);
       });
-  }
+  };
 
   const imageLoaded = (e) => {
     setImageSize({ height: e.target.height, width: e.target.width });
@@ -131,7 +127,9 @@ const Home = ({ user: { name, entries: count, id } }) => {
               alt="Detected Faces"
             />
             {boxes && imageSize.height && (
-              <Facebox boxes={boxes} imageSize={imageSize} />
+              <React.Suspense fallback={Loading()}>
+                <Facebox boxes={boxes} imageSize={imageSize} />
+              </React.Suspense>
             )}
           </div>
         )}
