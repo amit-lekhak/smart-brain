@@ -1,5 +1,5 @@
 const fetchProfile = (token) => {
-  return fetch("/profile", {
+  return fetch("https://smart-brain-docker.herokuapp.com/api/profile", {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -14,7 +14,7 @@ const fetchProfile = (token) => {
 };
 
 const signoutUser = (token) => {
-  return fetch("/logout", {
+  return fetch("https://smart-brain-docker.herokuapp.com/api/logout", {
     method: "GET",
     headers: {
       Accept: "application/json",

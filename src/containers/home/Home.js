@@ -30,7 +30,7 @@ const Home = ({ user: { name, entries: count, id } }) => {
 
   const fetchFaceMappings = (imageUrl,token) => {
 
-    fetch("/detectface", {
+    fetch("https://smart-brain-docker.herokuapp.com/api/detectface", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -58,7 +58,7 @@ const Home = ({ user: { name, entries: count, id } }) => {
 
   const updateEntryCount = (token) => {
     
-    fetch(`/profile/entry`, {
+    fetch(`https://smart-brain-docker.herokuapp.com/api/profile/entry`, {
       method: "PUT",
       headers: {
         Accept: "application/json",

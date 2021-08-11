@@ -4,12 +4,12 @@ import { getToken } from "../../utility/helperFunctions";
 import "./Profile.styles.css";
 
 const Profile = ({ updateUserState, user, setShowProfile }) => {
-  const { name, entries, joined, age, pet } = user;
+  const { name, entries, joined, age, pet} = user;
 
   const [userData, setUserData] = useState({
     name,
-    age: +age,
-    pet,
+    age: age ? +age : 0,
+    pet: pet ? pet : "",
   });
 
   const onSubmitHandler = (e) => {
@@ -23,7 +23,7 @@ const Profile = ({ updateUserState, user, setShowProfile }) => {
   const updateProfile = ({ name, age, pet }) => {
     if (!name) return;
 
-    fetch("/profile", {
+    fetch("https://smart-brain-docker.herokuapp.com/api/profile", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -57,7 +57,10 @@ const Profile = ({ updateUserState, user, setShowProfile }) => {
   };
 
   return (
-    <div className="profile-container">
+    <>
+    <div className="profile-background-container">
+    </div>
+      <div className="profile-container">
       <Card classnames="profile-card">
         <span onClick={closeModal} className="close-modal">
           &times;
@@ -135,7 +138,9 @@ const Profile = ({ updateUserState, user, setShowProfile }) => {
           </form>
         </div>
       </Card>
-    </div>
+
+      </div>
+    </>
   );
 };
 

@@ -3,8 +3,8 @@ import "./Login.styles.css";
 import { fetchProfile, saveToken } from "../../utility/helperFunctions";
 
 const Login = ({ onRouteChange, updateUserState }) => {
-  const [email, setEmail] = useState("test@test.com");
-  const [password, setPassword] = useState("123456");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onInputChangeHandler = (e) => {
     const field = e.target.name;
@@ -17,7 +17,7 @@ const Login = ({ onRouteChange, updateUserState }) => {
   };
 
   const loginUser = (email, password) => {
-    fetch("/login", {
+    fetch("https://smart-brain-docker.herokuapp.com/api/login", {
       method: "POST",
       headers: {
         Accept: "application/json",
