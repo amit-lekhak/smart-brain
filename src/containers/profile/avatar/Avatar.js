@@ -25,7 +25,7 @@ const Avatar = ({ signoutHandler, updateUserState, user }) => {
         <img
           onClick={dropdownHandler}
           className="avatar route"
-          src="http://tachyons.io/img/logo.jpg"
+          src="https://tachyons.io/img/logo.jpg"
           alt="avatar"
         />
       </div>

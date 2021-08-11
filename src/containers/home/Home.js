@@ -109,6 +109,7 @@ const Home = ({ user: { name, entries: count, id } }) => {
             type="text"
             name="imageUrl"
             id="imageUrl"
+            aria-label="image Url"
             autoComplete="false"
             value={imageUrl}
           />

@@ -68,7 +68,7 @@ const Profile = ({ updateUserState, user, setShowProfile }) => {
         <div>
           <img
             className="avatar"
-            src="http://tachyons.io/img/logo.jpg"
+            src="https://tachyons.io/img/logo.jpg"
             alt="avatar"
           />
 
