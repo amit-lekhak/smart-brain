@@ -17,7 +17,7 @@ const Login = ({ onRouteChange, updateUserState }) => {
   };
 
   const loginUser = (email, password) => {
-    fetch("https://smart-brain-docker.herokuapp.com/api/login", {
+    fetch("https://smartbrainapi-u3ff.onrender.com/api/login", {
       method: "POST",
       headers: {
         Accept: "application/json",

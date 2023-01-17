@@ -20,7 +20,7 @@ const Register = ({ onRouteChange, updateUserState }) => {
   };
 
   const registerUser = (email, password, name) => {
-    fetch("https://smart-brain-docker.herokuapp.com/api/register", {
+    fetch("https://smartbrainapi-u3ff.onrender.com/api/register", {
       method: "POST",
       headers: {
         Accept: "application/json",

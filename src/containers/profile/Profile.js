@@ -23,7 +23,7 @@ const Profile = ({ updateUserState, user, setShowProfile }) => {
   const updateProfile = ({ name, age, pet }) => {
     if (!name) return;
 
-    fetch("https://smart-brain-docker.herokuapp.com/api/profile", {
+    fetch("https://smartbrainapi-u3ff.onrender.com/api/profile", {
       method: "PUT",
       headers: {
         Accept: "application/json",
